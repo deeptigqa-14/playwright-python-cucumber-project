@@ -12,11 +12,13 @@ def secondWork():
     yield
     print("Tear down validation")
 
+@pytest.mark.smoke
 def test_initialcheck(preWork,secondWork):
     print("This is the initial check for pytest validation.")
     noTest()
     assert preWork == "pass"
 
+@pytest.mark.skip(reason="this is a skipped test")
 def test_2initialcheck(preWork,secondWork):
     print("This is the 2 initial check for pytest validation.")
 
