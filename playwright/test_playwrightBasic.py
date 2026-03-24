@@ -44,3 +44,5 @@ def test_firefoxBrowser(playwright:Playwright):
     page.get_by_role("link", name="Terms and Conditions").click()
     time.sleep(5)
     page.get_by_role("button", name="Sign in").click()
+
+
