@@ -1,7 +1,25 @@
+import json
+from pathlib import Path
+
 from playwright.sync_api import Playwright
+import os
+
+def getLoginPayload(filename: str ) -> dict:
+    #print("SWD:",os.getcwd())
+    filepath = Path(__file__).parent / filename
+    file= filepath.open("r", encoding="utf-8")
+    #with filepath.open("r", encoding="utf-8") as file:
+    return json.load(file)
 
 orderpayload = {"orders": [{"country": "India", "productOrderedId": "6960eac0c941646b7a8b3e68"}]}
-loginpayload = {"userEmail":"deeptigqa@gmail.com","userPassword":"Pr@ctice2026"}
+
+
+loginpayload = getLoginPayload("loginpayload.json")
+    #{"userEmail":"deeptigqa@gmail.com","userPassword":"Pr@ctice2026"}
+
+
+
+
 
 class apiUtil:
 
