@@ -15,9 +15,15 @@ def getLoginPayload(filename: str ) -> dict:
     #with filepath.open("r", encoding="utf-8") as file:
     return json.load(file)
 
-orderpayload = {"orders": [{"country": "India", "productOrderedId": "6960eac0c941646b7a8b3e68"}]}
+def getOrderPayload(filename):
+    filepath2 = Path(__file__).parent / filename
+    file2 = filepath2.open("r",encoding="utf-8")
+    return json.load(file2)
+
+orderpayload = getOrderPayload("orderPayload.json")
+    #{"orders": [{"country": "India", "productOrderedId": "6960eac0c941646b7a8b3e68"}]}
 loginpayload = getLoginPayload("loginpayload.json")
-    #{"userEmail":"deeptigqa@gmail.com","userPassword":"Pr@ctice2026"}
+
 
 
 

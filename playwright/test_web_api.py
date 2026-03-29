@@ -1,14 +1,14 @@
 from playwright.sync_api import Playwright, expect
 
+from Locators.Login_locators import LoginLocators
 from Utils.apiBase import apiUtil
 from config.config_reader import ConfigReader
 
 config_reader = ConfigReader()
+loginlocator = LoginLocators()
 username= config_reader.getUserName()
 password = config_reader.getPassword()
 base_url = config_reader.getBaseUrl()
-
-
 
 
 def test_apiValidation(playwright:Playwright):
@@ -21,9 +21,8 @@ def test_apiValidation(playwright:Playwright):
     orderid = api_util.createOrder(playwright)
 
     page.goto(base_url)
-    page.locator("#userEmail").fill(username)
-    page.locator("#userPassword").fill(password)
-    page.locator("#login").click()
+    loginlocator.login(page,username,password)
+
 
     page.get_by_role("Button", name="  ORDERS").click()
     orderRow= page.locator("tr").filter(has_text=orderid)

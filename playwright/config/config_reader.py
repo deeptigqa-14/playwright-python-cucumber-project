@@ -3,10 +3,10 @@ from pathlib import Path
 
 
 class ConfigReader:
-    def __init__(self, config_file="playwright/config/settings.ini"):
+    def __init__(self, config_file="config/settings.ini"):
         self.config = configparser.ConfigParser()
 
-        root_dir = Path(__file__).parents[2]  # adjust if needed
+        root_dir = Path(__file__).parents[1]  # adjust if needed
         full_path = root_dir / config_file
 
         print("CONFIG FULL PATH:", full_path)  # debug
