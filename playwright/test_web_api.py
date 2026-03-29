@@ -1,6 +1,14 @@
 from playwright.sync_api import Playwright, expect
 
 from Utils.apiBase import apiUtil
+from config.config_reader import ConfigReader
+
+config_reader = ConfigReader()
+username= config_reader.getUserName()
+password = config_reader.getPassword()
+base_url = config_reader.getBaseUrl()
+
+
 
 
 def test_apiValidation(playwright:Playwright):
@@ -12,9 +20,9 @@ def test_apiValidation(playwright:Playwright):
     api_util = apiUtil()
     orderid = api_util.createOrder(playwright)
 
-    page.goto("https://rahulshettyacademy.com/client/")
-    page.locator("#userEmail").fill("deeptigqa@gmail.com")
-    page.locator("#userPassword").fill("Pr@ctice2026")
+    page.goto(base_url)
+    page.locator("#userEmail").fill(username)
+    page.locator("#userPassword").fill(password)
     page.locator("#login").click()
 
     page.get_by_role("Button", name="  ORDERS").click()
