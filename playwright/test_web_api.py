@@ -24,7 +24,7 @@ def test_apiValidation(playwright:Playwright):
     loginlocator.login(page,username,password)
 
 
-    page.get_by_role("Button", name="  ORDERS").click()
+    page.get_by_role("button", name="  ORDERS").click()
     orderRow= page.locator("tr").filter(has_text=orderid)
     orderRow.get_by_role("button",name="View").click()
     expect(page.locator(".tagline")).to_have_text("Thank you for Shopping With Us")
