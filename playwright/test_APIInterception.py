@@ -20,6 +20,7 @@ fakeresponse = {"data":[],"message":"No Orders"}
 def response_interception(route):
     route.fulfill(json = fakeresponse)
     # for the fake request use route.continue() instead of route.fulfill()
+    #route.continue_(url="https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/somewrongcustomerid")
 
 def test_apiResponseIntercetion(playwright:Playwright):
     browser = playwright.chromium.launch(headless=False)
