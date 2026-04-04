@@ -17,7 +17,7 @@ def test_intersection_sessionStorage(playwright:Playwright):
     #provide javascript code to add token to session storage
     page.add_init_script(f"""localStorage.setItem('token', '{sessionToken}');""")
     page.goto(base_url)
-    tokenvalue=page.evaluate("""localStorage.getItem('token')""")
+    tokenvalue = page.evaluate("""localStorage.getItem('token')""")
     print(tokenvalue)
 
     page.get_by_role("button", name="  ORDERS").click()
