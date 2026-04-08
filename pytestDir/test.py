@@ -28,7 +28,7 @@ class VendingMachine:
 
 
 if __name__ == '__main__':
-    fptr = open("test.txt", 'w')
+    fptr = open("../playwright/test.txt", 'w')
 
     print("Enter the number of items and the price of each item:")
     num_items, item_coins = map(int, input().split())
