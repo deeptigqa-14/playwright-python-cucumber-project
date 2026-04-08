@@ -7,9 +7,8 @@ from Locators.ShoppingPage_locators import ShoppingPageLocators
 from config.config_reader import ConfigReader
 
 config_reader = ConfigReader()
-loginlocator = LoginLocators()
-shoppingpagelocator = ShoppingPageLocators()
-orderlistpagelocator = OrdersListPageLocators()
+
+
 
 base_url = config_reader.getBaseUrl()
 username= config_reader.getUserName()
@@ -26,10 +25,13 @@ def test_apiResponseIntercetion(playwright:Playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page= context.new_page()
+    loginlocator = LoginLocators(page)
+    shoppingpagelocator = ShoppingPageLocators(page)
+    orderlistpagelocator = OrdersListPageLocators(page)
     page.goto(base_url)
-    loginlocator.login(page, username, password)
+    loginlocator.login(username, password)
     page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-for-customer/*",response_interception)
-    shoppingpagelocator.clickOrders(page)
+    shoppingpagelocator.clickOrders()
     time.sleep(5)
    # assert orderlistpagelocator.orderPageDisplayed(page), "Order page is not displayed"
     #orderlistpagelocator.clickViewButton_firstOrder(page)

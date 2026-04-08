@@ -1,3 +1,4 @@
+import pytest
 from playwright.sync_api import Playwright, expect
 
 from Locators.Login_locators import LoginLocators
@@ -5,23 +6,23 @@ from Utils.apiBase import apiUtil
 from config.config_reader import ConfigReader
 
 config_reader = ConfigReader()
-loginlocator = LoginLocators()
+
 username= config_reader.getUserName()
 password = config_reader.getPassword()
 base_url = config_reader.getBaseUrl()
 
-
+@pytest.mark.smoke
 def test_apiValidation(playwright:Playwright):
     browser = playwright.chromium.launch(headless=False)
     context= browser.new_context()
     page= context.new_page()
-
+    loginlocator = LoginLocators(page)
     #create order using API and get the token
     api_util = apiUtil()
     orderid = api_util.createOrder(playwright)
 
     page.goto(base_url)
-    loginlocator.login(page,username,password)
+    loginlocator.login(username,password)
 
 
     page.get_by_role("button", name="  ORDERS").click()
