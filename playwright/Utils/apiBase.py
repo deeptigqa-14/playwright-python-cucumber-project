@@ -26,9 +26,6 @@ loginpayload = getLoginPayload("loginpayload.json")
 
 
 
-
-
-
 class apiUtil:
 
     def getToken(self, playwright:Playwright):
